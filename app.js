@@ -1,8 +1,9 @@
-require('dotenv').config()
-
 const express = require('express')
+require('dotenv').config()
+require("./src/db/dbConnection")
+
 const app = express()
-const port = process.env.PORT || 5001
+const port = process.env.PORT || 5002
 
 app.get("/", (req, res) => {
     res.json({
