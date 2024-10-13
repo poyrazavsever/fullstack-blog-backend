@@ -11,6 +11,10 @@ app.get("/", (req, res) => {
     })
 })
 
+const router = require('./src/routers/index');
+
+app.use("/api", router)
+
 app.listen(port, () => {
     console.log(`Server ${port} portunda çalışıyor...`)
 })
