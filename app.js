@@ -1,7 +1,9 @@
+require('express-async-errors');
 const express = require('express')
 require('dotenv').config()
 require("./src/db/dbConnection")
 const router = require('./src/routers/index');
+const errorHandlerMiddleware = require('./src/middlewares/errorHandler')
 
 const app = express()
 const port = process.env.PORT || 5002
@@ -18,6 +20,10 @@ app.get("/", (req, res) => {
         message: "Hoş geldiniz."
     })
 })
+
+// Hata yakalama
+
+app.use(errorHandlerMiddleware)
 
 app.listen(port, () => {
     console.log(`Server ${port} portunda çalışıyor...`)
