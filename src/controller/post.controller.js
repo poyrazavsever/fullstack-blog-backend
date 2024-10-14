@@ -94,10 +94,22 @@ const lastPost = async (req, res, next) => {
   }
 };
 
+const getAllPosts = async (req, res, next) => {
+  try {
+    // Tüm postları getir
+    const posts = await Post.find().populate('categories', 'name');
+
+    // Başarılı yanıt
+    return new Response(posts, 'All posts fetched successfully').success(res);
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
   createPost,
   updatePost,
   findByIdPost,
   lastPost,
+  getAllPosts,
 };
