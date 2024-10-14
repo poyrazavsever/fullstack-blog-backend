@@ -14,6 +14,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  categories: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'categories' // Refers to the Category model
+  }],
   reason: {
     type: String,
     required: true
