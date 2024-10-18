@@ -9,7 +9,7 @@ const errorHandlerMiddleware = require('../middlewares/errorHandler');
 router.post('/categories', createCategory);
 
 // POST isteği: Tüm kategorileri getir
-router.post('/categories/all', getAllCategories);
+router.get('/categories/all', getAllCategories);
 
 // Error handler middleware
 router.use(errorHandlerMiddleware);
