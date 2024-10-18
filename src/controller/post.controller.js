@@ -7,7 +7,10 @@ const Response = require('../utils/response');
 
 const createPost = async (req, res, next) => {
   try {
-    const { bannerImage, title, content, reason, source, categories } = req.body;
+    // Multer ile yüklenen dosya bilgisi
+    const bannerImage = req.file ? req.file.path : ''; // Yüklenen resmin yolu
+
+    const { title, content, reason, source, categories } = req.body;
 
     if (categories) {
       const categoryCheck = await Category.find({ _id: { $in: categories } });
@@ -16,26 +19,23 @@ const createPost = async (req, res, next) => {
       }
     }
 
-    
     const newPost = new Post({
       bannerImage,
       title,
       content,
       reason,
       source,
-      categories
+      categories,
     });
 
-    
     const savedPost = await newPost.save();
 
-    
     return new Response(savedPost, 'Post created successfully').created(res);
   } catch (err) {
-    
     next(err);
   }
 };
+
 
 const updatePost = async (req, res, next) => {
   try {
