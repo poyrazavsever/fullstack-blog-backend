@@ -15,10 +15,10 @@ router.post('/posts/update', updatePost);
 router.post('/posts/findById', findByIdPost);
 
 // POST isteği: Son eklenen postları getir
-router.post('/posts/latest', lastPost);
+router.get('/posts/latest', lastPost);
 
 // POST isteği: Tüm postları getir
-router.post('/posts/all', getAllPosts);
+router.get('/posts/all', getAllPosts);
 
 router.use(errorHandlerMiddleware);
 
