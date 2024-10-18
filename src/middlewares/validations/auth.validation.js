@@ -35,7 +35,8 @@ class AuthValidation {
                     "string.min": "Şifre alanı minimum 6 karakter olmalıdır.",
                     "string.max": "Şifre alanı en fazla 36 karakter olmalıdır.",
                     "string.required": "Şifre alanı zorunludur."
-                })
+                }),
+                isAdmin: joi.boolean()
                 
             }).validateAsync(req.body)
 
