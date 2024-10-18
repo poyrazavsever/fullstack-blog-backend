@@ -2,10 +2,12 @@ require('express-async-errors');
 const express = require('express')
 require('dotenv').config()
 require("./src/db/dbConnection")
+const cors = require('cors');
 const router = require('./src/routers/index');
 const errorHandlerMiddleware = require('./src/middlewares/errorHandler')
 
 const app = express()
+app.use(cors());
 const port = process.env.PORT || 5002
 
 // Middlewares
