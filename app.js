@@ -5,8 +5,10 @@ require("./src/db/dbConnection")
 const cors = require('cors');
 const router = require('./src/routers/index');
 const errorHandlerMiddleware = require('./src/middlewares/errorHandler')
+const path = require('path');
 
 const app = express()
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors());
 const port = process.env.PORT || 5002
 
