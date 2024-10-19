@@ -1,8 +1,13 @@
-// postRoutes.js
-
 const express = require('express');
 const router = express.Router();
-const { createPost, updatePost, findByIdPost, lastPost, getAllPosts } = require('../controller/post.controller');
+const {
+  createPost,
+  updatePost,
+  findByIdPost,
+  lastPost,
+  getAllPosts,
+  toggleLikePost, // Yeni fonksiyonu import et
+} = require('../controller/post.controller');
 const errorHandlerMiddleware = require('../middlewares/errorHandler'); // Hata yöneticisi
 const upload = require('../middlewares/multer'); // Multer middleware'ini import ettik
 
@@ -20,6 +25,9 @@ router.get('/posts/latest', lastPost);
 
 // POST isteği: Tüm postları getir
 router.get('/posts/all', getAllPosts);
+
+// POST isteği: Beğenme işlemi
+router.post('/posts/like', toggleLikePost);
 
 router.use(errorHandlerMiddleware);
 

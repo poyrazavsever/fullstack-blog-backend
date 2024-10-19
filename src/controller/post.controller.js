@@ -113,10 +113,40 @@ const getAllPosts = async (req, res, next) => {
   }
 };
 
+const toggleLikePost = async (req, res, next) => {
+  try {
+    const { userId, postId } = req.body; // userId ve postId'yi gövdeden alıyoruz
+
+    if (!userId || !postId) {
+      throw new APIError("User ID and Post ID are required", 400);
+    }
+
+    // Postu bul
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new APIError("Post not found", 404);
+    }
+
+    // Eğer kullanıcı daha önce beğenmişse, beğenme işlemini kaldır
+    if (post.likes.includes(userId)) {
+      post.likes.pull(userId); // Kullanıcıyı beğenilerden kaldır
+    } else {
+      post.likes.push(userId); // Kullanıcıyı beğenilere ekle
+    }
+
+    await post.save(); // Güncellemeyi kaydet
+    return new Response(post.likes, "Like toggled successfully").success(res);
+  } catch (err) {
+    console.error("Error in toggleLikePost:", err);
+    next(err);
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
   findByIdPost,
   lastPost,
   getAllPosts,
+  toggleLikePost,
 };
